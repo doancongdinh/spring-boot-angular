@@ -1,37 +1,37 @@
-<div *ngIf="currentFile" class="progress">
-  <div
-    class="progress-bar progress-bar-info progress-bar-striped"
-    role="progressbar"
-    attr.aria-valuenow="{{ progress }}"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    [ngStyle]="{ width: progress + '%' }"
-  >
-    {{ progress }}%
-  </div>
-</div>
+<!--<div *ngIf="currentFile" class="progress">-->
+<!--  <div-->
+<!--    class="progress-bar progress-bar-info progress-bar-striped"-->
+<!--    role="progressbar"-->
+<!--    attr.aria-valuenow="{{ progress }}"-->
+<!--    aria-valuemin="0"-->
+<!--    aria-valuemax="100"-->
+<!--    [ngStyle]="{ width: progress + '%' }"-->
+<!--  >-->
+<!--    {{ progress }}%-->
+<!--  </div>-->
+<!--</div>-->
 
-<label class="btn btn-default">
-  <input type="file" (change)="selectFile($event)" />
-</label>
+<!--<label class="btn btn-default">-->
+<!--  <input type="file" (change)="selectFile($event)" />-->
+<!--</label>-->
 
-<button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
-  Upload
-</button>
+<!--<button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">-->
+<!--  Upload-->
+<!--</button>-->
 
-<div class="alert alert-light" role="alert">{{ message }}</div>
+<!--<div class="alert alert-light" role="alert">{{ message }}</div>-->
 
-<div class="card">
-  <div class="card-header">List of Files</div>
-  <ul
-    class="list-group list-group-flush"
-    *ngFor="let file of fileInfos | async"
-  >
-    <li class="list-group-item">
-      <a href="{{ file.url }}">{{ file.name }}</a>
-    </li>
-  </ul>
-</div>
+<!--<div class="card">-->
+<!--  <div class="card-header">List of Files</div>-->
+<!--  <ul-->
+<!--    class="list-group list-group-flush"-->
+<!--    *ngFor="let file of fileInfos | async"-->
+<!--  >-->
+<!--    <li class="list-group-item">-->
+<!--      <a href="{{ file.url }}">{{ file.name }}</a>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->
 
 
 <div class="uploadfilecontainer" appDragDrop (onFileDropped)="uploadFile($event)">
@@ -42,9 +42,27 @@
     </a>
   </span>
 </div>
-<div  class="files-list" *ngFor="let file of files;let i= index">
-  <p> {{ file }} </p>
-  <button class="delete-file" (click)="deleteAttachment(i)">
-    <img src="../../assets/Recycle_Bin_Full.png">
-  </button>
+<div  class="files-list" *ngFor="let item of files;let i= index">
+  <p>
+    {{ item.file.name }}
+    <span (click)="deleteAttachment(i)" style="float: right">x</span>
+  </p>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
+      [ngStyle]="{ width: item.progress + '%' }"
+    >
+    </div>
+  </div>
+  <p>{{ item.progress }}%</p>
+</div>
+<div class="card">
+  <div class="card-header">List of Files</div>
+  <ul
+    class="list-group list-group-flush"
+    *ngFor="let file of fileInfos | async"
+  >
+    <li class="list-group-item">
+      <a href="{{ file.url }}">{{ file.name }}</a>
+    </li>
+  </ul>
 </div>

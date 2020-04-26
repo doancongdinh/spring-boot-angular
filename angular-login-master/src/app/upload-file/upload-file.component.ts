@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UploadFileService} from '../service/upload-file.service';
 import {Observable} from 'rxjs';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {FileInfo} from "./FileInfo";
 
 @Component({
   selector: 'app-upload-file',
@@ -17,17 +18,12 @@ export class UploadFileComponent implements OnInit {
   message = '';
 
   fileInfos: Observable<any>;
-
-
-
-
-  files: any = [];
+  files: FileInfo[] = [];
 
   ngOnInit() {
     this.fileInfos = this.uploadService.getFiles();
   }
   selectFile(event) {
-    console.log(event.target.files);
     this.selectedFiles = event.target.files;
     this.readThis(event.target);
   }
@@ -44,34 +40,30 @@ export class UploadFileComponent implements OnInit {
     myReader.readAsText(file);
   }
 
-  upload() {
-    this.progress = 0;
-
-    this.currentFile = this.selectedFiles.item(0);
-    this.uploadService.upload(this.currentFile).subscribe(
-      event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.progress = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.message = event.body.message;
-          this.fileInfos = this.uploadService.getFiles();
-        }
-      },
-      err => {
-        this.progress = 0;
-        this.message = 'Could not upload the file!';
-        this.currentFile = undefined;
-      });
-
-    this.selectedFiles = undefined;
+  upload(files: FileInfo[]) {
+    Array.from(files).forEach(file => {
+      this.uploadService.upload(file.file).subscribe(
+        event => {
+          if (event.type === HttpEventType.UploadProgress) {
+            file.progress = Math.round(100 * event.loaded / event.total);
+          } else if (event instanceof HttpResponse) {
+            this.message = event.body.message;
+            this.fileInfos = this.uploadService.getFiles();
+            this.files = this.files.filter(item => !item.file.name === event.body.name);
+          }
+        },
+        err => {
+          this.progress = 0;
+          this.message = 'Could not upload the file!';
+          this.currentFile = undefined;
+        });
+    });
   }
 
   uploadFile(event) {
     const files = event;
-    for (let index = 0; index < files.length; index++) {
-      const element = files[index];
-      this.files.push(element.name);
-    }
+    this.files = Array.from(files).map(file => new FileInfo(file, 0));
+    this.upload(this.files);
   }
 
   deleteAttachment(index) {
