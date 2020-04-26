@@ -1,0 +1,24 @@
+<div class="containter">
+  <table *ngIf="summary" class="table table-bordered">
+    <thead>
+      <tr>
+        <td>New Confirmed</td>
+        <td>Total Confirmed</td>
+        <td>New Deaths</td>
+        <td>Total Deaths</td>
+        <td>New Recovered</td>
+        <td>Total Recovered</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{summary.global.newConfirmed | number}}</td>
+        <td>{{summary.global.totalConfirmed | number}}</td>
+        <td>{{summary.global.newDeaths | number}}</td>
+        <td>{{summary.global.totalDeaths | number}}</td>
+        <td>{{summary.global.newRecovered | number}}</td>
+        <td>{{summary.global.totalRecovered | number}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

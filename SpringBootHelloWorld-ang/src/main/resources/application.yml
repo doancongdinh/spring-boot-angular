@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: app-demo
+  datasource:
+    url: jdbc:mysql://localhost:3306/localDB?useSSL=false&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatement=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    maximum-pool-size: 5
+  http:
+    multipart:
+      max-request-size: 1MB
+      max-file-size: 1MB
+
+
+server:
+  contextPath: /test
+  port: 8081

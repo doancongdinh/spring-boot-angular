@@ -1,0 +1,50 @@
+<div *ngIf="currentFile" class="progress">
+  <div
+    class="progress-bar progress-bar-info progress-bar-striped"
+    role="progressbar"
+    attr.aria-valuenow="{{ progress }}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [ngStyle]="{ width: progress + '%' }"
+  >
+    {{ progress }}%
+  </div>
+</div>
+
+<label class="btn btn-default">
+  <input type="file" (change)="selectFile($event)" />
+</label>
+
+<button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+  Upload
+</button>
+
+<div class="alert alert-light" role="alert">{{ message }}</div>
+
+<div class="card">
+  <div class="card-header">List of Files</div>
+  <ul
+    class="list-group list-group-flush"
+    *ngFor="let file of fileInfos | async"
+  >
+    <li class="list-group-item">
+      <a href="{{ file.url }}">{{ file.name }}</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="uploadfilecontainer" appDragDrop (onFileDropped)="uploadFile($event)">
+  <span> Drag here or
+    <a href="javascript:void(0)" (click)="fileInput.click()">
+      browse
+      <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+    </a>
+  </span>
+</div>
+<div  class="files-list" *ngFor="let file of files;let i= index">
+  <p> {{ file }} </p>
+  <button class="delete-file" (click)="deleteAttachment(i)">
+    <img src="../../assets/Recycle_Bin_Full.png">
+  </button>
+</div>
