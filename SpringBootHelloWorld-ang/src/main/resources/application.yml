@@ -16,3 +16,7 @@ spring:
 server:
   contextPath: /test
   port: 8081
+
+jwt:
+    secret: javainuse
+
