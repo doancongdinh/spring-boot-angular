@@ -27,18 +27,17 @@ export class AuthenticationService {
   }
 
   authenticate(username, password) {
-    return this.httpClient.post<any>('test/authenticate', {username, password}).pipe(
-      map(
+    return this.httpClient.post<any>('test/authenticate', {'username' : username, 'password' : password})
+      .subscribe(
         userData => {
           sessionStorage.setItem('username', username);
-          const tokenStr = 'Bearer ' + userData.token;
+          const tokenStr = userData.token;
           sessionStorage.setItem('token', tokenStr);
           return userData;
         }
-      )
-
     );
   }
+
 
 
   isUserLoggedIn() {
@@ -49,5 +48,6 @@ export class AuthenticationService {
 
   logOut() {
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('token');
   }
 }

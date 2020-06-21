@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from './employee/employee.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
@@ -14,6 +14,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { SummaryComponent } from './summary/summary.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import {DragDropDirective} from './directive/DragDropDirective';
+import {AuthHtppInterceptorService} from "./service/AuthHtppInterceptorService.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,13 @@ import {DragDropDirective} from './directive/DragDropDirective';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthHtppInterceptorService,
+      multi   : true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

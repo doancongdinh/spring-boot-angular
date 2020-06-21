@@ -17,11 +17,12 @@ public class FirebaseUtil {
     @PostConstruct
     public void init() {
         try {
-            FileInputStream serviceAccount =
-                    new FileInputStream("/Users/admin/Desktop/spring/SpringBootHelloWorld-ang/serviceAccountKey.json");
+
+            FileInputStream fileInputStream =
+                    new FileInputStream("/Users/admin/Desktop/spring/spring-boot-angular/SpringBootHelloWorld-ang/src/main/resources/firebase.json");
 
             FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setCredentials(GoogleCredentials.fromStream(fileInputStream))
                     .setDatabaseUrl("https://covid-6d27f.firebaseio.com")
                     .build();
 

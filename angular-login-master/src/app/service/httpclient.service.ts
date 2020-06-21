@@ -23,13 +23,13 @@ export class HttpClientService {
 
 
   getEmployees() {
-    const basicString = this.getHeaders();
-
-    const headers = new HttpHeaders(
-      {Authorization: basicString}
-    );
+    // const basicString = this.getHeaders();
+    //
+    // const headers = new HttpHeaders(
+    //   {Authorization: basicString}
+    // );
     // console.log('test call');
-    return this.httpClient.get<Employee[]>('test/employees', {headers});
+    return this.httpClient.get<Employee[]>('test/employees');
   }
 
   public deleteEmployee(employee) {
