@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 // Reactive Form
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 // App routing modules
 import { AppRoutingModule } from './shared/routing/app-routing.module';
@@ -16,14 +16,15 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 // Firebase services + enviorment module
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 // Auth service
-import { AuthService } from "./shared/services/auth.service";
-import { ChatComponent } from './components/chat/chat.component';
+import { AuthService } from './shared/services/auth.service';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 
 @NgModule({
@@ -34,10 +35,12 @@ import { ChatComponent } from './components/chat/chat.component';
     DashboardComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    ChatComponent
+    EmployeeComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

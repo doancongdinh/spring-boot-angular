@@ -21,9 +21,9 @@ public class DataController {
     @Autowired
     private JdbcTemplate db;
 
-    @GetMapping("/summary")
-    public Object getSummary() throws Exception {
-        return firebaseService.saveSummary(dataService.getSummary());
-    }
+//    @GetMapping("/summary")
+//    public Object getSummary() throws Exception {
+//        return firebaseService.saveSummary(dataService.getSummary());
+//    }
 
 }

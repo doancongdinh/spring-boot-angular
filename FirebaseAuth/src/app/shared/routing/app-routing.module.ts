@@ -8,7 +8,7 @@ import { ForgotPasswordComponent } from '../../components/forgot-password/forgot
 import { VerifyEmailComponent } from '../../components/verify-email/verify-email.component';
 
 import { AuthGuard } from '../../shared/guard/auth.guard';
-import {ChatComponent} from '../../components/chat/chat.component';
+import {EmployeeComponent} from '../../components/employee/employee.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full'},
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
-  { path: 'chats/:id', component: ChatComponent, canActivate: [AuthGuard] }
+  { path: 'employee', component: EmployeeComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
