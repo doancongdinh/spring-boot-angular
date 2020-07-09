@@ -26,8 +26,6 @@ export class EmployeeComponent implements OnInit {
           address: e.payload.doc.data().address,
         };
       });
-      console.log(this.employee);
-
     });
   }
 

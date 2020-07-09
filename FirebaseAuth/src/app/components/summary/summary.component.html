@@ -1,1 +1,28 @@
-<p>summary works!</p>
+<select (change)="onChange($event.target.value)">
+  <option value="Global">Global</option>
+  <option *ngFor="let item of summary" value="{{item.slug}}">{{item.country}}</option>
+</select>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <td>date</td>
+      <td>newConfirmed</td>
+      <td>newDeaths</td>
+      <td>newRecovered</td>
+      <td>totalConfirmed</td>
+      <td>totalDeaths</td>
+      <td>totalRecovered</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{data?.date}}</td>
+      <td>{{data?.newConfirmed}}</td>
+      <td>{{data?.newDeaths}}</td>
+      <td>{{data?.newRecovered}}</td>
+      <td>{{data?.totalConfirmed}}</td>
+      <td>{{data?.totalDeaths}}</td>
+      <td>{{data?.totalRecovered}}</td>
+    </tr>
+  </tbody>
+</table>

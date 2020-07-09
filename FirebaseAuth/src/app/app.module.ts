@@ -25,6 +25,8 @@ import { environment } from '../environments/environment';
 import { AuthService } from './shared/services/auth.service';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import {AngularFireFunctions, AngularFireFunctionsModule, ORIGIN, REGION} from '@angular/fire/functions';
+import {HttpClient} from '@angular/common/http';
 
 
 @NgModule({
@@ -45,9 +47,14 @@ import { SummaryComponent } from './components/summary/summary.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireFunctionsModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    // {provide: ORIGIN, useValue: 'http://localhost:5000'}
+    {provide: REGION, useValue: 'us-central1'}
+    ],
   bootstrap: [AppComponent]
 })
 
